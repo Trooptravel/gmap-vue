@@ -106,7 +106,6 @@ export default {
 
   provide() {
     this.$mapPromise = new Promise((resolve, reject) => {
-
       this.$mapPromiseDeferred = { resolve, reject };
     });
     return {
@@ -152,6 +151,7 @@ export default {
       .then(() => {
         // getting the DOM element where to create the map
         const element = this.$refs['vue-map'];
+
         // creating the map
         const initialOptions = {
           ...this.options,
@@ -178,9 +178,6 @@ export default {
         // binding events
         bindEvents(this, this.$mapObject, events);
 
-
-
-
         // manually trigger center and zoom
         twoWayBindingWrapper((increment, decrement, shouldUpdate) => {
           this.$mapObject.addListener('center_changed', () => {
@@ -202,19 +199,12 @@ export default {
           );
         });
 
-
-
         this.$mapObject.addListener('zoom_changed', () => {
           this.$emit('zoom_changed', this.$mapObject.getZoom());
         });
         this.$mapObject.addListener('bounds_changed', () => {
           this.$emit('bounds_changed', this.$mapObject.getBounds());
         });
-
-        // this.$mapObject.addListener('click', (evt) => {
-        //   this.$emit('click', evt);
-        // });
-
 
         this.$mapPromiseDeferred.resolve(this.$mapObject);
 
