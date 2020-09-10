@@ -8,10 +8,11 @@
  *
  * */
 export default {
-  inject: {
-    $mapPromise: { default: 'abcdef' },
-  },
-
+  inject: ['$mapPromise'],
+  // inject:{
+    // $mapPromise: { default: 'abcdef!' },
+  // },
+  
   provide() {
     // Note: although this mixin is not "providing" anything,
     // components' expect the `$map` property to be present on the component.

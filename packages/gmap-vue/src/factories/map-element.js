@@ -131,7 +131,6 @@ export default function mapElement(providedOptions) {
           }
           return this[instanceName];
         });
-
       this[promiseName] = promise;
       return { [promiseName]: promise };
     },

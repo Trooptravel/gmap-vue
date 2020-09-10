@@ -47,9 +47,9 @@ const events = [
   'dragend',
   'dragstart',
   'idle',
-  'mousemove',
-  'mouseout',
-  'mouseover',
+  // 'mousemove',
+  // 'mouseout',
+  // 'mouseover',
   'resize',
   'rightclick',
   'tilesloaded',
@@ -106,13 +106,15 @@ export default {
 
   provide() {
     this.$mapPromise = new Promise((resolve, reject) => {
+
       this.$mapPromiseDeferred = { resolve, reject };
     });
     return {
       $mapPromise: this.$mapPromise,
     };
   },
-
+  created() {
+  },
   computed: {
     finalLat() {
       return this.center && typeof this.center.lat === 'function'
@@ -145,17 +147,17 @@ export default {
   },
 
   mounted() {
+    let self = this;
     return this.$gmapApiPromiseLazy()
       .then(() => {
         // getting the DOM element where to create the map
         const element = this.$refs['vue-map'];
-
         // creating the map
         const initialOptions = {
           ...this.options,
           ...getPropsValues(this, props),
         };
-
+        
         // don't use delete keyword in order to create a more predictable code for the engine
         const { options: extraOptions, ...finalOptions } = initialOptions;
         const options = finalOptions;
@@ -170,11 +172,14 @@ export default {
           this.$mapObject = new google.maps.Map(element, options);
           window[recycleKey] = { map: this.$mapObject };
         }
-
+        
         // binding properties (two and one way)
         bindProps(this, this.$mapObject, props);
         // binding events
         bindEvents(this, this.$mapObject, events);
+
+        
+       
 
         // manually trigger center and zoom
         twoWayBindingWrapper((increment, decrement, shouldUpdate) => {
@@ -196,14 +201,24 @@ export default {
             updateCenter
           );
         });
+        
+
+
         this.$mapObject.addListener('zoom_changed', () => {
           this.$emit('zoom_changed', this.$mapObject.getZoom());
         });
         this.$mapObject.addListener('bounds_changed', () => {
           this.$emit('bounds_changed', this.$mapObject.getBounds());
         });
+        
+        // this.$mapObject.addListener('click', (evt) => {
+        //   this.$emit('click', evt);
+        // });
+  
 
         this.$mapPromiseDeferred.resolve(this.$mapObject);
+        
+        this.$emit('on-map-loaded',{map:this.$mapObject,vm:this});
 
         return this.$mapObject;
       })

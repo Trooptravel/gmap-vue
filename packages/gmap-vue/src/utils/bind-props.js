@@ -67,9 +67,9 @@ export function bindProps(vueInst, googleMapsInst, props) {
       }
 
       if (
-        twoWay &&
+        true || twoWay &&
         (vueInst.$gmapOptions.autobindAllEvents ||
-          vueInst.$listeners[eventName])
+          vueInst.$props[eventName])
       ) {
         googleMapsInst.addListener(eventName, () => {
           vueInst.$emit(eventName, googleMapsInst[getMethodName]());
