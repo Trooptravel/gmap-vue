@@ -1,6 +1,6 @@
 import {install} from '../packages/gmap-vue/src/main.js';
 
-// export GmapVue;
+// export GmapVue testing checkin...;
 
 import {loadGmapApi,
   HeatmapLayer,
