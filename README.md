@@ -34,9 +34,9 @@ We have planned to improve and grow all required documentation about the plugin.
 
 Please follow the next link to our [documentation](https://diegoazh.github.io/gmap-vue/).
 
-## Fork of vue2-google-maps
+## Fork of gmap-vue
 
-This is a fork of the popular vue2-google-maps. As the author of the library no longer commits to maintain the project, we forked it to develop and maintain the project.
+This is a fork of the gmap-vue library to start the vue3 conversion. This is for internal use and not an official repo.
 
 ## CONTRIBUTORS ARE WELCOME
 
