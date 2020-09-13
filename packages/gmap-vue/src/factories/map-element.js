@@ -134,6 +134,11 @@ export default function mapElement(providedOptions) {
       this[promiseName] = promise;
       return { [promiseName]: promise };
     },
+    beforeUnmount() {
+      if (this[instanceName] && this[instanceName].setMap) {
+        this[instanceName].setMap(null);
+      }
+    },
     destroyed() {
       // Note: not all Google Maps components support maps
       if (this[instanceName] && this[instanceName].setMap) {

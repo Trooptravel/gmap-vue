@@ -31,7 +31,6 @@ const COMPONENTS = Object.entries({
     {name}, defn.$vgmOptions, ManualDoc[name] || {props:{}, mappedProps: {}})
 }).filter(x => x.name)
 
-console.log(COMPONENTS, ManualDoc)
 
 export default {
   data () {

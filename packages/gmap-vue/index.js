@@ -43,7 +43,6 @@ const all_components = {
   StreetViewPanorama,
 };
 
-console.log('ALL IN INDEX COMPONENTS:',all_components);
 
 export {
   loadGmapApi,

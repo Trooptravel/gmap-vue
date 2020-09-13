@@ -1,6 +1,5 @@
 import GmapVue3 from './src/main.js';
 
-console.log('GmapVue3:',GmapVue3);
 
 import {
   loadGmapApi,

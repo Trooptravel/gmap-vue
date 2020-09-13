@@ -371,7 +371,6 @@ export default {
       this.center = _.clone(this.reportedCenter);
     },
     mapClicked(mouseArgs) {
-      console.log('map clicked', mouseArgs); // eslint-disable-line no-console
     },
     mapRclicked(mouseArgs) {
       const createdMarker = this.addMarker();
