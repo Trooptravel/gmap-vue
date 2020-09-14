@@ -1,0 +1,47 @@
+<body>
+  <div id="app">
+    <GmapMap :center="{lat: 1.38, lng: 103.8}" :zoom="12" style="width: 100%; height: 500px"></GmapMap>
+</div>
+
+  <script src="https://unpkg.com/vue@3.0.0-rc.10/dist/vue.global.prod.js"></script>
+  <script src="gmap-vue.js"></script>
+
+  <script>
+
+     const app = Vue.createApp({
+       el: '#app',
+       data: () => ({
+         center: {
+           lat: 10.0,
+           lng: 10.0
+         },
+       }),
+       methods: {
+        on_map_loaded(map) {
+          console.log('map',map)
+        }
+       }
+     });
+
+     app.mount("#app");
+
+
+     app.use(GmapVue, {
+       load: {
+         key: 'AIzaSyANqjdfVKcdJqe1lnXGnqba4rjQ7ucPGo8',
+         libraries: 'places',
+        // v:'weekly',
+       },
+       // Demonstrating how we can customize the name of the components
+       installComponents: true,
+     });
+
+     document.addEventListener('DOMContentLoaded', function() {
+      app.component('google-map', GmapVue.Map);
+      console.log(`app`, app)
+     });
+
+
+
+</script>
+</body>

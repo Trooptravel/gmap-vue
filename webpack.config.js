@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 // Write out the list of examples to the examples index
 const examplesDir = path.resolve(__dirname, 'components')

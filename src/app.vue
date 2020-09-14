@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-parsing-error */
 /* vim: set softtabstop=2 shiftwidth=2 expandtab : */
 <template>
 <div class="app-panel">
@@ -23,10 +24,10 @@
     <option value="normal">normal</option>
   </select>
     <br> Enable scrollwheel zooming on the map: <input type="checkbox" v-model="scrollwheel">
-    <br>
+    <div>
     <button @click="addMarker"> Add a new Marker</button> (or right click on the map :) )
     <h1>Clusters</h1> enabled: <input type="checkbox" v-model="clustering">
-    </br>
+    </div>
     Grid size: <input type="number" v-model.number="gridSize">
     <br>
     <h1>Polyline</h1> Editable: <input type="checkbox" v-model="pleditable">

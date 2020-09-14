@@ -1,0 +1,127 @@
+<body>
+
+  <div id="app">
+    <div id="example">
+    <GmapMap @on-map-loaded="on_map_loaded" ref='gmap-vue':options='map_options' style='position:absolute; width:100%; height:100%; border:1px dotted magenta'
+    >
+      <!-- <google-marker v-for="m in markers" :position="m.position" :clickable="true" :draggable="true" @click="center=m.position"></google-marker> -->
+    </GmapMap>
+  </div>
+</div>
+
+<style>
+  div#app {
+    display:flex;
+    align-items:stretch;
+    justify-content:stretch;
+    position:fixed;
+    top:0px;
+    left:0px;
+   bottom:0px;
+   right:0px;
+    border:1px dotted blue;
+  }
+  div#example {
+    /* position:fixed;
+    top:0px;
+    left:0px;
+    border:1px dotted red;
+    bottom:0px;
+   right:0px; */
+   border:3px dotted red;
+   flex:1;
+   position:relative;
+  }
+  div#example > div {
+   border:3px dotted green;
+   flex:1;
+   position:relative;
+   display:flex;
+    align-items:stretch;
+    justify-content:stretch;
+  }
+</style>
+  <script src="https://unpkg.com/vue@3.0.0-rc.10/dist/vue.global.prod.js"></script>
+  <script src="gmap-vue.js"></script>
+
+  <script>
+//  import {map} from "gmap-vue.js"
+     const app = Vue.createApp({
+       el: '#app',
+       data: () => ({
+         center: {
+           lat: 10.0,
+           lng: 10.0
+         },
+         markers: [{
+           position: {
+             lat: 10.0,
+             lng: 10.0
+           }
+         }, {
+           position: {
+             lat: 11.0,
+             lng: 11.0
+           }
+         }]
+       }),
+       methods: {
+        on_map_loaded(map) {
+          console.log('map',map)
+        }
+       }
+     });
+
+const map_options = {
+        center: {lat:0,lng:0},
+          mapTypeId:'satellite',
+          zoom:10,
+          mapTypeControl: true,
+          fullscreenControl: false,
+          streetViewControl: false,
+          scaleControl: true,
+          rotateControl:true,
+          mapTypeControlOptions: {
+            style: 2, // google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+            position: 7,//google.maps.ControlPosition.RIGHT_TOP,
+            mapTypeIds: ['roadmap', 'terrain','hybrid', 'satellite']
+          }
+      }
+
+
+
+     app.use(GmapVue, {
+        // components: [
+        //   'map',
+        //   'marker',
+        // ],
+       load: {
+       //  key: 'AIzaSyANqjdfVKcdJqe1lnXGnqba4rjQ7ucPGo8',
+         libraries: 'places',
+        // v:'weekly',
+       },
+       // Demonstrating how we can customize the name of the components
+       installComponents: true,
+     });
+
+     app.component('test_component', () => {
+
+     });
+
+
+     document.addEventListener('DOMContentLoaded', function() {
+      console.log(`app`, app)
+      // app.component('google-map', GmapVue.Map);
+    //   app.component('google-marker', GmapVue.Marker);
+
+       // console.log(`DOM content loaded`, app)
+       // console.log(`GmapVue`, GmapVue)
+       // console.log(`Map`, GmapVue.Map)
+       // console.log(`Marker`, GmapVue.Marker)
+
+     });
+     app.mount("#app");
+
+
+</script>
+</body>

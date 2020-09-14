@@ -1,8 +1,9 @@
-import Vue from 'vue/dist/vue.js'
+import {createApp, Vue} from 'vue'
 import App from './app.vue'
 import * as GmapVue from '../../src/main.js'
+const app = createApp(App)
 
-Vue.use(GmapVue, {
+app.use(GmapVue, {
   installComponents: true,
   load: {
     key: 'AIzaSyDf43lPdwlF98RCBsJOFNKOkoEjkwxb5Sc',
@@ -11,7 +12,7 @@ Vue.use(GmapVue, {
 })
 
 // json filter is now not bundled with vue
-Vue.filter('json', x => JSON.stringify(x))
+//Vue.filter('json', x => JSON.stringify(x))
 
 // TODO: Should be analyzed when we start with the test issue
 // eslint-disable-next-line no-new
