@@ -9,6 +9,7 @@ import Circle from './components/circle';
 import Rectangle from './components/rectangle';
 import DrawingManager from './components/drawing-manager.vue';
 // Vue component imports
+import HTMLMarker from './components/html-marker.vue';
 import InfoWindow from './components/info-window.vue';
 import Map from './components/map.vue';
 import StreetViewPanorama from './components/street-view-panorama.vue';
@@ -40,6 +41,7 @@ export {
   Circle,
   Cluster,
   Rectangle,
+  HTMLMarker,
   DrawingManager,
   InfoWindow,
   Map,
@@ -86,9 +88,11 @@ export function install(Vue, options) {
   // eslint-disable-next-line no-param-reassign -- old style this should be analyzed;
   Vue.$gmapApiPromiseLazy = gmapApiPromiseLazy;
   if (options.installComponents) {
+    console.log('HTMLMarker:',HTMLMarker);
     Vue.component('GmapMap', Map);
     Vue.component('GmapMarker', Marker);
     Vue.component('GmapInfoWindow', InfoWindow);
+    Vue.component('GmapHtmlMarker', HTMLMarker);
     Vue.component('GmapHeatmapLayer', HeatmapLayer);
     Vue.component('GmapKmlLayer', KmlLayer);
     Vue.component('GmapPolyline', Polyline);
