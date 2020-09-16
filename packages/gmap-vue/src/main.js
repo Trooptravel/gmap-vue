@@ -88,7 +88,6 @@ export function install(Vue, options) {
   // eslint-disable-next-line no-param-reassign -- old style this should be analyzed;
   Vue.$gmapApiPromiseLazy = gmapApiPromiseLazy;
   if (options.installComponents) {
-    console.log('HTMLMarker:',HTMLMarker);
     Vue.component('GmapMap', Map);
     Vue.component('GmapMarker', Marker);
     Vue.component('GmapInfoWindow', InfoWindow);

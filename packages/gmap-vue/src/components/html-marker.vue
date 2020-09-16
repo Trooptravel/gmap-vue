@@ -13,7 +13,6 @@ import {mapState,mapActions} from 'vuex';
 
 import MapElementMixin from '../mixins/map-element.js';
 
-console.log('MapElementMixin:',MapElementMixin);
 
 export default {
   mixins: [MapElementMixin],
@@ -101,7 +100,7 @@ export default {
           panes.overlayMouseTarget.appendChild(this.div)
         }
         onRemove () {
-            self.$slots?.default?.[0]?.elm?.remove?.(); // self.$refs.map_overlay.remove();
+          self.$slots?.default?.[0]?.elm?.remove?.(); // self.$refs.map_overlay.remove();
           //self.$el.remove()
         }
       }
@@ -127,12 +126,12 @@ export default {
     is_active() {
       return (this.active[this.group] === this.record_id && this.active_group === this.group);
     },
-    // lat () {
-    //   return parseFloat(this.marker.lat || this.marker.latitude)
-    // },
-    // lng () {
-    //   return parseFloat(this.marker.lng || this.marker.longitude)
-    // },
+    lat () {
+      return parseFloat(this.marker.lat || this.marker.latitude)
+    },
+    lng () {
+      return parseFloat(this.marker.lng || this.marker.longitude)
+    },
     z_index() {
       let group_index = (this.active_group === this.group) ? 100 : 1;
       let item_index  = (this.active[this.group] === this.record_id ) ? 100 : 0;
