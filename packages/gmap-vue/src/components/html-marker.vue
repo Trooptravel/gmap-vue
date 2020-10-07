@@ -8,7 +8,6 @@
 
 
 <script>
-import {mapState,mapActions} from 'vuex';
 
 import MapElementMixin from '../mixins/map-element.js';
 
@@ -98,10 +97,8 @@ export default {
     })
   },
   methods: {
-    ...mapActions([])
   },
   computed: {
-    ...mapState([]),
     lat () {
       return parseFloat(this.marker.lat || this.marker.latitude)
     },
