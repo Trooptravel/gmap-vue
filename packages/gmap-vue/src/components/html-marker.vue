@@ -1,20 +1,19 @@
 <template>
   <div  class="google-map-overlay">
     <div class="custom-marker" ref="custom_marker" :style="z_index">
-    <slot />
+    <slot name="default"/>
     </div>
   </div>
 </template>
 
 
 <script>
-
 import {mapState,mapActions} from 'vuex';
 
 import MapElementMixin from '../mixins/map-element.js';
 
-
 export default {
+  name:'HTMLMarker',
   mixins: [MapElementMixin],
   props: {
     group:{type:String,default:'none'},
@@ -68,51 +67,34 @@ export default {
           this.div = null;
         }
         repaint () {
-//          const div = self.$el; // self.$slots.default[0];
- 
             this.div = self.$refs.custom_marker;
-              
-          // const div =  self.$refs.custom_marker; //self.$slots.default[0].elm; // self.$refs.map_overlay;
-          // let before = new Date().getTime();
           const projection = this.getProjection()
-          // let after = new Date().getTime();
           if (projection && this.div) {
             const posPixel = projection.fromLatLngToDivPixel(self.position);
             let x, y
-            x = posPixel.x ; // - (div.offsetWidth / 2)
-            y = posPixel.y ; // - div.offsetHeight;
+            x = posPixel.x ; 
+            y = posPixel.y ; 
             this.div.style['z-index'] = (self.hovering ? 10000 : 10)
             this.div.style.left = `${x-50}px`;
             this.div.style.top = `${y-100}px`;
           }
         }
         onAdd () {
-          // const div = self.$el
-          this.div =   self.$refs.custom_marker; //default[0].elm; // self.$refs.map_overlay; //
+          this.div =   self.$refs.custom_marker; 
           const panes = this.getPanes()
           let pos = {lat() { return self.lat},lng() { return self.lng}};
           this.pos = pos;
           this.div.style.position = 'absolute'
-          // div.style.display = 'inline-block'
           this.div.style.zIndex = 50;
-          // this.div = self.$slots.default[0].elm;
           panes.overlayLayer.appendChild(this.div)
           panes.overlayMouseTarget.appendChild(this.div)
         }
         onRemove () {
-          self.$slots?.default?.[0]?.elm?.remove?.(); // self.$refs.map_overlay.remove();
-          //self.$el.remove()
+          self.$slots?.default?.[0]?.elm?.remove?.(); 
         }
       }
       this.$overlay = new Overlay(map)
-      // if (this.delayRepaint) {
-      //   setTimeout(() => {
-      //     this.$overlay.repaint()
-      //     this.opacity = 1
-      //   }, this.delayRepaint)
-      // } else {
       this.opacity = 1
-      // }
     })
   },
   methods: {
@@ -166,47 +148,18 @@ export default {
 
 <style>
 
-div.google-map-overlay-marker{
-  /* border:1px dotted red; */
-  min-width: 0px;
-  max-width: 0px;
-  min-height: 0px;
-  max-height: 0px;
-  position: absolute;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  overflow: show;
-  transform-origin: 50% 50%;
-  pointer-events: none;
-  /* top:400px;
-  left:400px; */
-  /* z-index: -1; */
-  /* transform-origin: center center;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  /* top:0px; */
-  /* background: red; */
-}
 
-div.google-map-overlay-marker{
-/* div.google-map-overlay-center{ */
+div.custom-marker{
+  pointer-events: none;
   min-width: 100px;
   max-width: 100px;
   min-height: 100px;
   max-height: 100px;
-  /* border:1px dotted red; */
+  z-index: 1000;
   position: relative;
   display: grid;
-  /* left:-100px; */
-  /* top:-100px; */
-  transform-origin: 50% 50%;
-  pointer-events: none;
-}
-
-div.custom-marker{
-  pointer-events: none;
+  align-items: end;
+  justify-content: center;
 }
 
 </style>
