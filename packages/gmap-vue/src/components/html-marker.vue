@@ -16,16 +16,16 @@ export default {
   name:'HTMLMarker',
   mixins: [MapElementMixin],
   props: {
-    group:{type:String,default:'none'},
+    group_active:{type:Boolean,default:false},
+    active:{type:Boolean,defualt:false},
+    hovering:{type:Boolean,default:false},
     record_id:{type:String,defualt:'none'},
-    bezier:{type:Boolean,default:true},
     lat:{type:Number,required:true},
     lng:{type:Number,required:true},
     delayRepaint: {
       type: Number,
       default: undefined
     },
-    hovering:{type:Boolean,default:false},
     marker: {
       type: Object,
       default: undefined
@@ -74,7 +74,7 @@ export default {
             let x, y
             x = posPixel.x ; 
             y = posPixel.y ; 
-            this.div.style['z-index'] = (self.hovering ? 10000 : 10)
+            this.div.style['z-index'] = self.z_index;
             this.div.style.left = `${x-50}px`;
             this.div.style.top = `${y-100}px`;
           }
@@ -98,16 +98,10 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['set_bezier_coordinates'])
+    ...mapActions([])
   },
   computed: {
-    ...mapState(['active_group','active']),
-    z_index() {
-      return (this.hovering === true) ? {'z-index':1000} : {'z-index':10};
-    },
-    is_active() {
-      return (this.active[this.group] === this.record_id && this.active_group === this.group);
-    },
+    ...mapState([]),
     lat () {
       return parseFloat(this.marker.lat || this.marker.latitude)
     },
@@ -115,9 +109,10 @@ export default {
       return parseFloat(this.marker.lng || this.marker.longitude)
     },
     z_index() {
-      let group_index = (this.active_group === this.group) ? 100 : 1;
-      let item_index  = (this.active[this.group] === this.record_id ) ? 100 : 0;
-      return (group_index + item_index)
+      let group_index = (this.group_active ) ? 100 : 1;
+      let item_index  = (this.active ) ? 200 : 2;
+      let hover_index = (this.hovering ) ? 300 : 3;
+      return (group_index + item_index + hover_index);
     },
     position () {
       const self = this
