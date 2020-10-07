@@ -66,7 +66,7 @@ export default {
           this.div = null;
         }
         repaint () {
-            this.div = self.$refs.custom_marker;
+          this.div = self.$refs.custom_marker;
           const projection = this.getProjection()
           if (projection && this.div) {
             const posPixel = projection.fromLatLngToDivPixel(self.position);
@@ -89,7 +89,8 @@ export default {
           panes.overlayMouseTarget.appendChild(this.div)
         }
         onRemove () {
-          self.$slots?.default?.[0]?.elm?.remove?.(); 
+          self.$refs.custom_marker?.remove?.();
+          // self.$slots?.default?.[0]?.elm?.remove?.(); 
         }
       }
       this.$overlay = new Overlay(map)
