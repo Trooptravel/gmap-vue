@@ -50,6 +50,9 @@ export default {
   updated() {
   },
   watch: {
+    hovering() {
+      this.$overlay.repaint();
+    },
     marker (val) {
       this.$mapPromise.then(map => this.$overlay.setPosition())
     },
@@ -73,6 +76,7 @@ export default {
             let x, y
             x = posPixel.x ; 
             y = posPixel.y ; 
+            this.div.style.position = 'absolute';
             this.div.style['z-index'] = self.z_index;
             this.div.style.left = `${x-50}px`;
             this.div.style.top = `${y-100}px`;
@@ -83,8 +87,8 @@ export default {
           const panes = this.getPanes()
           let pos = {lat() { return self.lat},lng() { return self.lng}};
           this.pos = pos;
-          this.div.style.position = 'absolute'
-          this.div.style.zIndex = 50;
+          this.div.style.position = 'absolute';
+          this.div.style.zIndex = 1;
           panes.overlayLayer.appendChild(this.div)
           panes.overlayMouseTarget.appendChild(this.div)
         }
