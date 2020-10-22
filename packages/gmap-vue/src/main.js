@@ -97,6 +97,7 @@ export function install(Vue, options) {
     Vue.component('GmapPolyline', Polyline);
     Vue.component('GmapPolygon', Polygon);
     Vue.component('GmapCircle', Circle);
+    Vue.component('GmapCluster',Cluster);
     Vue.component('GmapRectangle', Rectangle);
     Vue.component('GmapDrawingManager', DrawingManager);
     Vue.component('GmapAutocomplete', Autocomplete);

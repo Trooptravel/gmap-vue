@@ -94,9 +94,19 @@ export default mapElementFactory({
 
   render(h) {
     // <div><slot></slot></div>
+
+    if (!this.$slots.default || this.$slots.default.length === 0) {
+      return '';
+    }
+    if (this.$slots.default.length === 1) {
+      // So that infowindows can have a marker parent
+      return this.$slots.default[0];
+    }
+    
+    
     return h('div', this.$slots.default);
   },
-
+  
   afterCreate(inst) {
     const reinsertMarkers = () => {
       const oldMarkers = inst.getMarkers();
