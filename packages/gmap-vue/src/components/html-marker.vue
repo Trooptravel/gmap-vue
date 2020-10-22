@@ -37,6 +37,10 @@ export default {
       type: Number,
       default: 0
     },
+    offsetZ:{
+      type: Number,
+      default: 0
+    },
     alignment: {
       type: String,
       default: "top"
@@ -114,7 +118,7 @@ export default {
       let group_index = (this.group_active ) ? 100 : 1;
       let item_index  = (this.active ) ? 200 : 2;
       let hover_index = (this.hovering ) ? 300 : 3;
-      return (group_index + item_index + hover_index);
+      return (group_index + item_index + hover_index + this.offsetZ);
     },
     position () {
       const self = this
