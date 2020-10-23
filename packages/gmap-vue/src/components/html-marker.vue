@@ -62,7 +62,7 @@ export default {
     },
   },
   provide () {
-    const self = this
+    const self = this;
     this.$mapPromise.then(map => {
       class Overlay extends google.maps.OverlayView {
         constructor (map) {
@@ -88,13 +88,18 @@ export default {
         }
         onAdd () {
           this.div =   self.$refs.custom_marker; 
-          const panes = this.getPanes()
-          let pos = {lat() { return self.lat},lng() { return self.lng}};
-          this.pos = pos;
-          this.div.style.position = 'absolute';
-          this.div.style.zIndex = 1;
-          panes.overlayLayer.appendChild(this.div)
-          panes.overlayMouseTarget.appendChild(this.div)
+          if (this.div !== undefined && this.div !== null) {
+            const panes = this.getPanes()
+            let pos = {lat() { return self.lat},lng() { return self.lng}};
+            this.pos = pos;
+            if (this.div === null || this.div === undefined) {
+              console.log('record_id:',self.record_id);
+            }
+            this.div.style.position = 'absolute';
+            this.div.style.zIndex = 1;
+            panes.overlayLayer.appendChild(this.div)
+            panes.overlayMouseTarget.appendChild(this.div)
+          }
         }
         onRemove () {
           self.$refs.custom_marker?.remove?.();
